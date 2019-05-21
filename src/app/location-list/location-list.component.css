@@ -1,0 +1,11 @@
+.locations {
+  display: flex;
+  flex-wrap: auto;
+  justify-content: space-between;
+}
+
+.location {
+  margin: 5px;
+  padding: 5px;
+  border: solid black 1px;
+}
