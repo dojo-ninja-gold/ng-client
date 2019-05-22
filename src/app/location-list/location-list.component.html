@@ -1,22 +1,7 @@
 <div class="locations">
-  <div class="location">
-    <h2>Farm</h2>
-    <p>between 10 and 20 golds</p>
-    <button>Find Gold!</button>
-  </div>
-  <div class="location">
-    <h2>Farm</h2>
-    <p>between 10 and 20 golds</p>
-    <button>Find Gold!</button>
-  </div>
-  <div class="location">
-    <h2>Farm</h2>
-    <p>between 10 and 20 golds</p>
-    <button>Find Gold!</button>
-  </div>
-  <div class="location">
-    <h2>Farm</h2>
-    <p>between 10 and 20 golds</p>
+  <div *ngFor='let location of locations' class="location">
+    <h2>{{ location.fields.name }}</h2>
+    <p>between {{ location.fields.min_gold }} and {{ location.fields.max_gold }} golds</p>
     <button>Find Gold!</button>
   </div>
 </div>
