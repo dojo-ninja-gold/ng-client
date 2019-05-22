@@ -1,7 +1,9 @@
 <h3>Activities:</h3>
 <div class="activities">
-  <p class="green">Won 20 gold in the casino</p>
-  <p class="green">Won 20 gold in the casino</p>
-  <p class="red">Lost 20 gold in the casino</p>
-  <p class="red">Lost 20 gold in the casino</p>
+  <p
+  *ngFor='let activity of activities'
+  [ngClass]="{
+    'green': activity.fields.gold > 0,
+    'red': activity.fields.gold < 0
+  }">{{ activity.fields.gold > 0 ? "Won" : "Lost" }} {{ activity.fields.gold }} golds at the {{ activity.fields.location }}!</p>
 </div>
