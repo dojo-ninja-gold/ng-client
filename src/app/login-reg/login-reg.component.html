@@ -12,10 +12,10 @@
   <input type="submit" value="Register">
 </form>
 <h2>Login</h2>
-<form>
+<form (submit)="submitLogin()">
   <label for="email">Email:</label>
-  <input type="text" name="email" placeholder="vanillaice@yahoo.com">
+  <input type="text" name="email" placeholder="vanillaice@yahoo.com" [(ngModel)]="loginData.email">
   <label for="password">Password:</label>
-  <input type="password" name="password" placeholder="iceicebaby99">
+  <input type="password" name="password" placeholder="iceicebaby99" [(ngModel)]="loginData.password">
   <input type="submit" value="Login">
 </form>

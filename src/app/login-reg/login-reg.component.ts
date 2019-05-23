@@ -13,7 +13,7 @@ export class LoginRegComponent implements OnInit {
     password: '',
   }
 
-  loginForm: object = {
+  loginData: object = {
     email: '',
     password: '',
   }
@@ -25,5 +25,9 @@ export class LoginRegComponent implements OnInit {
 
   submitRegister() {
     console.log(this.registerData);
+  }
+
+  submitLogin() {
+    console.log(this.loginData);
   }
 }
