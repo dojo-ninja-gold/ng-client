@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { GoldComponent } from './gold/gold.component';
 import { LocationListComponent } from './location-list/location-list.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
+import { LoginRegComponent } from './login-reg/login-reg.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GoldComponent,
     LocationListComponent,
-    ActivityListComponent
+    ActivityListComponent,
+    LoginRegComponent
   ],
   imports: [
     BrowserModule,
