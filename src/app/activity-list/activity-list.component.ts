@@ -12,13 +12,10 @@ export class ActivityListComponent implements OnInit {
   constructor(private activityService: ActivitiesService) { }
 
   ngOnInit() {
-    this.getActivities();
-  }
-
-  getActivities() {
-    let obs = this.activityService.getActivities();
-    obs.subscribe((data) => {
-      this.activities = data;
-    });
+    this.activityService.getActivities();
+    this.activityService.activities$
+      .subscribe((data) => {
+        this.activities = data;
+      });
   }
 }
