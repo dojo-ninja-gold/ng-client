@@ -27,8 +27,8 @@ export class LocationListComponent implements OnInit {
     });
   }
 
-  onClick() {
-    this.activityService.createActivity();
+  onClick(locationId: number) {
+    this.activityService.createActivity(locationId);
   }
 }
 

@@ -14,9 +14,9 @@ export class ActivitiesService {
     return this.http.get<object[]>(`${this.baseUrl}/1`);
   }
 
-  createActivity(): void {
+  createActivity(locationId: number): void {
     let obs = this.http.post(`${this.baseUrl}/create/`, {
-      location_id: 1,
+      location_id: locationId,
       user_id: 1
     });
     obs.subscribe((data) => {
