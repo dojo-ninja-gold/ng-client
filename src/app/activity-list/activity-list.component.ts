@@ -19,6 +19,6 @@ export class ActivityListComponent implements OnInit {
       });
 
     // make the service update activities$
-    this.activityService.getActivities();
+    this.activityService.getFullActivities();
   }
 }

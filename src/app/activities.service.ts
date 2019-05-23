@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, forkJoin } from 'rxjs';
+import { LocationsService } from './locations.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,31 @@ export class ActivitiesService {
   activities: object[] = [];
   activities$ = new BehaviorSubject<object[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private locationService: LocationsService
+  ) { }
 
-  getActivities(): void {
-    let obs = this.http.get<object[]>(`${this.baseUrl}/1`);
-    obs.subscribe((data) => {
-      this.activities = data;
+  getActivities(): Observable<object[]> {
+    return this.http.get<object[]>(`${this.baseUrl}/1`);
+  }
+
+  getFullActivities(): void {
+    forkJoin(
+      this.getActivities(),
+      this.locationService.getLocations()
+    ).subscribe(([activities, locations]) => {
+      for(let activity of activities) {
+        for(let location of locations) {
+          if(activity.fields.location === location.pk) {
+            activity.fields.location = location.fields.name;
+            break;
+          }
+        }
+      }
+      this.activities = activities;
       this.activities$.next(this.activities);
-    });
+    })
   }
 
   createActivity(locationId: number): void {
@@ -26,7 +44,7 @@ export class ActivitiesService {
       user_id: 1
     });
     obs.subscribe((data) => {
-      this.getActivities();
+      this.getFullActivities();
     });
   }
 }
