@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivitiesService } from '../activities.service';
 
 @Component({
   selector: 'app-activity-list',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./activity-list.component.css']
 })
 export class ActivityListComponent implements OnInit {
+  activities: object[];
 
-  constructor() { }
+  constructor(private activityService: ActivitiesService) { }
 
   ngOnInit() {
-  }
+    // listen for updates to activities$
+    this.activityService.activities$
+      .subscribe((data) => {
+        this.activities = data;
+      });
 
+    // make the service update activities$
+    this.activityService.getFullActivities();
+  }
 }

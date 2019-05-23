@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationsService } from '../locations.service';
 import { $ } from 'protractor';
+import { ActivitiesService } from '../activities.service';
 
 @Component({
   selector: 'app-location-list',
@@ -10,7 +11,10 @@ import { $ } from 'protractor';
 export class LocationListComponent implements OnInit {
   locations: object[];
 
-  constructor(private locationsService: LocationsService) { }
+  constructor(
+    private locationsService: LocationsService,
+    private activityService: ActivitiesService
+  ) { }
   
   ngOnInit() {
     this.getLocations();
@@ -21,6 +25,10 @@ export class LocationListComponent implements OnInit {
     obs.subscribe((data) => {
       this.locations = data;
     });
+  }
+
+  onClick(locationId: number) {
+    this.activityService.createActivity(locationId);
   }
 }
 
