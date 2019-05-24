@@ -9,7 +9,7 @@ import { Activity } from './activity';
   providedIn: 'root'
 })
 export class ActivitiesService {
-  baseUrl: string = 'http://localhost:8000/activities';
+  baseUrl: string = 'http://3.91.217.149/activities';
   activities: Activity[] = [];
   activities$ = new BehaviorSubject<Activity[]>([]);
 

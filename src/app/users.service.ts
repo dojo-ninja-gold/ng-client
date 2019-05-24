@@ -18,7 +18,7 @@ export class UsersService {
     gold: null,
   })
 
-  baseUrl: string = 'http://localhost:8000/users'
+  baseUrl: string = 'http://3.91.217.149/users'
   constructor(private http: HttpClient) { }
 
   getUser() {
