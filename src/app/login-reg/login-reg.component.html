@@ -1,4 +1,9 @@
 <h1>Login Or Register</h1>
+<div *ngIf='errors' class="errors">
+  <ul>
+    <li *ngFor='let error of errors'>{{ error }}</li>
+  </ul>
+</div>
 <h2>Register</h2>
 <form (submit)='submitRegister()'>
   <label for="first_name">First Name:</label>

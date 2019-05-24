@@ -19,16 +19,34 @@ export class LoginRegComponent implements OnInit {
     password: '',
   }
 
+  errors: string[] = [];
+
   constructor(private userService: UsersService) { }
 
   ngOnInit() {
   }
 
   submitRegister() {
-    this.userService.createUser(this.registerData);
+    let obs = this.userService.createUser(this.registerData);
+    obs.subscribe(
+      (data) => {
+        localStorage.setItem('user_id', data.id);
+      },
+      (errResponse) => {
+        this.errors = errResponse.error;
+      }
+    )
   }
 
   submitLogin() {
-    this.userService.loginUser(this.loginData);
+    let obs = this.userService.loginUser(this.loginData);
+    obs.subscribe(
+      (data) => {
+        localStorage.setItem('user_id', data.id);
+      },
+      (errResponse) => {
+        this.errors = errResponse.error;
+      }
+    )
   }
 }

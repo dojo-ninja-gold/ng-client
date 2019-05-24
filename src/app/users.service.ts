@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,27 +24,11 @@ export class UsersService {
 
   }
 
-  createUser(userData: object): void {
-    let obs = this.http.post<object>(`${this.baseUrl}/create/`, userData);
-    obs.subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (errors) => {
-        console.log(errors);
-      }
-    )
+  createUser(userData: object): Observable<any> {
+    return this.http.post<object>(`${this.baseUrl}/create/`, userData);
   }
 
-  loginUser(loginData: object): void {
-    let obs = this.http.post<object>(`${this.baseUrl}/login/`, loginData);
-    obs.subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (errors) => {
-        console.log(errors);
-      }
-    )
+  loginUser(loginData: object): Observable<any> {
+    return this.http.post<object>(`${this.baseUrl}/login/`, loginData);
   }
 }
