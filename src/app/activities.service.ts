@@ -8,16 +8,16 @@ import { LocationsService } from './locations.service';
 })
 export class ActivitiesService {
   baseUrl: string = 'http://localhost:8000/activities';
-  activities: object[] = [];
-  activities$ = new BehaviorSubject<object[]>([]);
+  activities: any[] = [];
+  activities$ = new BehaviorSubject<any[]>([]);
 
   constructor(
     private http: HttpClient,
     private locationService: LocationsService
   ) { }
 
-  getActivities(): Observable<object[]> {
-    return this.http.get<object[]>(`${this.baseUrl}/1`);
+  getActivities(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/1`);
   }
 
   getFullActivities(): void {
