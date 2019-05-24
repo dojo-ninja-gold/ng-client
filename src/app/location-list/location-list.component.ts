@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationsService } from '../locations.service';
-import { $ } from 'protractor';
 import { ActivitiesService } from '../activities.service';
+import { Location } from '../location';
 
 @Component({
   selector: 'app-location-list',
@@ -9,7 +9,7 @@ import { ActivitiesService } from '../activities.service';
   styleUrls: ['./location-list.component.css']
 })
 export class LocationListComponent implements OnInit {
-  locations: object[];
+  locations: Location[];
 
   constructor(
     private locationsService: LocationsService,
@@ -31,8 +31,3 @@ export class LocationListComponent implements OnInit {
     this.activityService.createActivity(locationId);
   }
 }
-
-
-// $.get('http://localhost:8000', function(data) {
-//   console.log(data);
-// })
