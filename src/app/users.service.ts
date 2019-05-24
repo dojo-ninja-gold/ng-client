@@ -6,12 +6,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-  user: object = {
+  user: any = {
     first_name: null,
     id: null,
     gold: null,
   }
-  user$ = new BehaviorSubject<object>({
+  user$ = new BehaviorSubject<any>({
     first_name: null,
     id: null,
     gold: null,
@@ -34,5 +34,10 @@ export class UsersService {
 
   logout() {
     localStorage.clear();
+  }
+
+  updateGold(goldAmt: number): void {
+    this.user.gold = goldAmt;
+    this.user$.next(this.user);
   }
 }
