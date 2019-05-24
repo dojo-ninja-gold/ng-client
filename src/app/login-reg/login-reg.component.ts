@@ -8,14 +8,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login-reg.component.css']
 })
 export class LoginRegComponent implements OnInit {
-  registerData: object = {
+  registerData: any = {
     first_name: '',
     last_name: '',
     email: '',
     password: '',
   }
 
-  loginData: object = {
+  loginData: any = {
     email: '',
     password: '',
   }
@@ -35,7 +35,7 @@ export class LoginRegComponent implements OnInit {
     let obs = this.userService.createUser(this.registerData);
     obs.subscribe(
       (data) => {
-        localStorage.setItem('user_id', data.id);
+        localStorage.setItem('user_id', data.id.toString());
         this.redirectToDashboard();
       },
       (errResponse) => {
@@ -48,7 +48,7 @@ export class LoginRegComponent implements OnInit {
     let obs = this.userService.loginUser(this.loginData);
     obs.subscribe(
       (data) => {
-        localStorage.setItem('user_id', data.id);
+        localStorage.setItem('user_id', data.id.toString());
         this.redirectToDashboard();
       },
       (errResponse) => {
