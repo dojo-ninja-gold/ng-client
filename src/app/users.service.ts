@@ -31,4 +31,8 @@ export class UsersService {
   loginUser(loginData: object): Observable<any> {
     return this.http.post<object>(`${this.baseUrl}/login/`, loginData);
   }
+
+  logout() {
+    localStorage.clear();
+  }
 }

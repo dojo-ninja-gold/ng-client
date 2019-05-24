@@ -8,6 +8,8 @@ import { GoldComponent } from './gold/gold.component';
 import { LocationListComponent } from './location-list/location-list.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { LoginRegComponent } from './login-reg/login-reg.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { LoginRegComponent } from './login-reg/login-reg.component';
     GoldComponent,
     LocationListComponent,
     ActivityListComponent,
-    LoginRegComponent
+    LoginRegComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

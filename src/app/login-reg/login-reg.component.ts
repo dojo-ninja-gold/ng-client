@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-reg',
@@ -21,7 +22,11 @@ export class LoginRegComponent implements OnInit {
 
   errors: string[] = [];
 
-  constructor(private userService: UsersService) { }
+  constructor(
+    private userService: UsersService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
   }
@@ -31,6 +36,7 @@ export class LoginRegComponent implements OnInit {
     obs.subscribe(
       (data) => {
         localStorage.setItem('user_id', data.id);
+        this.redirectToDashboard();
       },
       (errResponse) => {
         this.errors = errResponse.error;
@@ -43,10 +49,15 @@ export class LoginRegComponent implements OnInit {
     obs.subscribe(
       (data) => {
         localStorage.setItem('user_id', data.id);
+        this.redirectToDashboard();
       },
       (errResponse) => {
         this.errors = errResponse.error;
       }
     )
+  }
+
+  redirectToDashboard() {
+    this.router.navigate(['/dashboard'])
   }
 }
