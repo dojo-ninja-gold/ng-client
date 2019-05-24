@@ -1,0 +1,26 @@
+<h1>Login Or Register</h1>
+<div *ngIf='errors' class="errors">
+  <ul>
+    <li *ngFor='let error of errors'>{{ error }}</li>
+  </ul>
+</div>
+<h2>Register</h2>
+<form (submit)='submitRegister()'>
+  <label for="first_name">First Name:</label>
+  <input type="text" name="first_name" placeholder="Vanilla" [(ngModel)]='registerData.first_name'>
+  <label for="last_name">Last Name:</label>
+  <input type="text" name="last_name" placeholder="Ice" [(ngModel)]='registerData.last_name'>
+  <label for="email">Email:</label>
+  <input type="text" name="email" placeholder="vanillaice@yahoo.com" [(ngModel)]='registerData.email'>
+  <label for="password">Password:</label>
+  <input type="password" name="password" placeholder="iceicebaby99" [(ngModel)]='registerData.password'>
+  <input type="submit" value="Register">
+</form>
+<h2>Login</h2>
+<form (submit)="submitLogin()">
+  <label for="email">Email:</label>
+  <input type="text" name="email" placeholder="vanillaice@yahoo.com" [(ngModel)]="loginData.email">
+  <label for="password">Password:</label>
+  <input type="password" name="password" placeholder="iceicebaby99" [(ngModel)]="loginData.password">
+  <input type="submit" value="Login">
+</form>

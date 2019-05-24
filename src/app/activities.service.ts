@@ -2,22 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, forkJoin } from 'rxjs';
 import { LocationsService } from './locations.service';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivitiesService {
   baseUrl: string = 'http://localhost:8000/activities';
-  activities: object[] = [];
-  activities$ = new BehaviorSubject<object[]>([]);
+  activities: any[] = [];
+  activities$ = new BehaviorSubject<any[]>([]);
 
   constructor(
     private http: HttpClient,
-    private locationService: LocationsService
+    private locationService: LocationsService,
+    private userService: UsersService
   ) { }
 
-  getActivities(): Observable<object[]> {
-    return this.http.get<object[]>(`${this.baseUrl}/1`);
+  getActivities(): Observable<any[]> {
+    const userId: number = localStorage.getItem('user_id');
+    if(userId === null) {
+      console.log('user not found');
+    } else {
+      return this.http.get<any[]>(`${this.baseUrl}/${userId}`);
+    }
   }
 
   getFullActivities(): void {
@@ -25,7 +32,9 @@ export class ActivitiesService {
       this.getActivities(),
       this.locationService.getLocations()
     ).subscribe(([activities, locations]) => {
+      let totalGold = 0;
       for(let activity of activities) {
+        totalGold += activity.fields.gold;
         for(let location of locations) {
           if(activity.fields.location === location.pk) {
             activity.fields.location = location.fields.name;
@@ -33,18 +42,24 @@ export class ActivitiesService {
           }
         }
       }
+      this.userService.updateGold(totalGold);
       this.activities = activities;
       this.activities$.next(this.activities);
     })
   }
 
   createActivity(locationId: number): void {
-    let obs = this.http.post(`${this.baseUrl}/create/`, {
-      location_id: locationId,
-      user_id: 1
-    });
-    obs.subscribe((data) => {
-      this.getFullActivities();
-    });
+    const userId: number = localStorage.getItem('user_id');
+    if(userId === null) {
+      console.log('user not found');
+    } else {
+      let obs = this.http.post(`${this.baseUrl}/create/`, {
+        location_id: locationId,
+        user_id: userId
+      });
+      obs.subscribe((data) => {
+        this.getFullActivities();
+      });
+    }
   }
 }
