@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RegisterData, LoginData } from '../user';
 
 @Component({
   selector: 'app-login-reg',
@@ -8,14 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login-reg.component.css']
 })
 export class LoginRegComponent implements OnInit {
-  registerData: any = {
+  registerData: RegisterData = {
     first_name: '',
     last_name: '',
     email: '',
     password: '',
   }
 
-  loginData: any = {
+  loginData: LoginData = {
     email: '',
     password: '',
   }
