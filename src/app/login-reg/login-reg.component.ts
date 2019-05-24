@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RegisterData, LoginData } from '../user';
 
 @Component({
   selector: 'app-login-reg',
@@ -8,14 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login-reg.component.css']
 })
 export class LoginRegComponent implements OnInit {
-  registerData: object = {
+  registerData: RegisterData = {
     first_name: '',
     last_name: '',
     email: '',
     password: '',
   }
 
-  loginData: object = {
+  loginData: LoginData = {
     email: '',
     password: '',
   }
@@ -35,7 +36,7 @@ export class LoginRegComponent implements OnInit {
     let obs = this.userService.createUser(this.registerData);
     obs.subscribe(
       (data) => {
-        localStorage.setItem('user_id', data.id);
+        localStorage.setItem('user_id', data.id.toString());
         this.redirectToDashboard();
       },
       (errResponse) => {
@@ -48,7 +49,7 @@ export class LoginRegComponent implements OnInit {
     let obs = this.userService.loginUser(this.loginData);
     obs.subscribe(
       (data) => {
-        localStorage.setItem('user_id', data.id);
+        localStorage.setItem('user_id', data.id.toString());
         this.redirectToDashboard();
       },
       (errResponse) => {
