@@ -3,14 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, forkJoin } from 'rxjs';
 import { LocationsService } from './locations.service';
 import { UsersService } from './users.service';
+import { Activity } from './activity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivitiesService {
   baseUrl: string = 'http://localhost:8000/activities';
-  activities: any[] = [];
-  activities$ = new BehaviorSubject<any[]>([]);
+  activities: Activity[] = [];
+  activities$ = new BehaviorSubject<Activity[]>([]);
 
   constructor(
     private http: HttpClient,
@@ -18,12 +19,12 @@ export class ActivitiesService {
     private userService: UsersService
   ) { }
 
-  getActivities(): Observable<any[]> {
-    const userId: number = localStorage.getItem('user_id');
+  getActivities(): Observable<Activity[]> {
+    const userId: string = localStorage.getItem('user_id');
     if(userId === null) {
       console.log('user not found');
     } else {
-      return this.http.get<any[]>(`${this.baseUrl}/${userId}`);
+      return this.http.get<Activity[]>(`${this.baseUrl}/${userId}`);
     }
   }
 
@@ -49,11 +50,11 @@ export class ActivitiesService {
   }
 
   createActivity(locationId: number): void {
-    const userId: number = localStorage.getItem('user_id');
+    const userId: string = localStorage.getItem('user_id');
     if(userId === null) {
       console.log('user not found');
     } else {
-      let obs = this.http.post(`${this.baseUrl}/create/`, {
+      let obs = this.http.post<Activity[]>(`${this.baseUrl}/create/`, {
         location_id: locationId,
         user_id: userId
       });
